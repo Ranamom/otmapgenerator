@@ -1,7 +1,7 @@
 import React from "react"
 import Head from "next/head"
 import { ThemeProvider } from "theme-ui"
-import { Global } from "@emotion/core"
+import { Global } from "@emotion/react"
 
 import "nprogress/nprogress.css" //styles of nprogress
 import "normalize.css/normalize.css"
@@ -12,7 +12,7 @@ function App(props) {
   const { Component, pageProps } = props
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={defaultTheme as any}>
       <Head>
         <title>OT Map Generator</title>
         <link rel="icon" href="/favicon.ico" />

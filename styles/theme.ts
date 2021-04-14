@@ -1,9 +1,5 @@
 import { Theme } from "theme-ui"
 
-interface CustomTheme extends Omit<Theme, "colors"> {
-  colors: object
-}
-
 const defaultColorPalette = {
   /** From index 0 to 4, it means from darker to lighter */
   /** Primary is darker tone, secondary is lighter tone to create contrast */
@@ -11,7 +7,7 @@ const defaultColorPalette = {
   secondary: ["#e2d9d3ff", "#d7cac2ff", "#ceb7a9ff", "#bc9882ff", "#ae8164ff"],
 }
 
-const theme: CustomTheme = {
+const theme: Theme = {
   colors: {
     ...defaultColorPalette,
     /** Generate light mode from default color palette, by swaping the variables */
