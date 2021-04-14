@@ -1715,10 +1715,10 @@ otbm2json@^0.2.0:
   resolved "https://registry.yarnpkg.com/otbm2json/-/otbm2json-0.2.0.tgz#00c66106ad2e9bc0d6bc6d05ac2536c22a273b0c"
   integrity sha512-jbD7gZmASqvZzUjoyv6RdtCALpKcaqi3w+ozZEDXZCJPVPpBN6TVYfuJIgCoQauGsx/AAReLyd1O9C/DPmuG0Q==
 
-otmapgen@^1.5.2:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/otmapgen/-/otmapgen-1.5.2.tgz#44229f43234dd520c46d10b8218e07a722d7574e"
-  integrity sha512-rPrjTMtCbQhVuYiFkXUVy3LoAqGeCXjQXDVV5PJuZ7/Qhgb+4Y9bfmTvV60mqJn1sxlDyT8tGU2pnnCUGUlKWw==
+otmapgen@^1.5.3:
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/otmapgen/-/otmapgen-1.5.3.tgz#b4beec16ab7d9883273dadcc3935e76b7c9bff0a"
+  integrity sha512-Acf5COnfzdKfjwkUsYND7XwktXopzP7+bSMVWDPnUaGyW1aliOYHTPfHsXyyoJsNIYR1wrMrq2A+NojtU7cu3Q==
   dependencies:
     otbm2json "^0.2.0"
 

@@ -16,7 +16,7 @@
     "next-ga": "^2.3.4",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
-    "otmapgen": "^1.5.2",
+    "otmapgen": "latest",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "theme-ui": "^0.6.2"

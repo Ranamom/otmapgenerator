@@ -11,8 +11,8 @@ import Minimap from "../components/molecules/Minimap"
 
 const DEFAULT_SETTINGS: SettingsType = {
   SEED: "",
-  WIDTH: 128,
-  HEIGHT: 128,
+  WIDTH: 256,
+  HEIGHT: 256,
   VERSION: "10.98",
   TERRAIN_ONLY: false,
   GENERATION: {
