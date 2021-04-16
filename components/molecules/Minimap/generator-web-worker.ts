@@ -16,7 +16,7 @@ async function fetchLayerData(settings: MapGeneratorSettings) {
   return layerData
 }
 
-addEventListener("message", async (message) => {
+global.addEventListener?.("message", async (message) => {
   const { data: { settings } = {} } = message
   if (settings) {
     try {

@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { Flex, jsx } from "theme-ui"
+import "./generator-web-worker"
 
 import { useRef, useState, useEffect } from "react"
 import dynamic from "next/dynamic"
