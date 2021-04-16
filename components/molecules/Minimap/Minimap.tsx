@@ -29,6 +29,8 @@ function Minimap(props: IMinimapProps) {
       new URL("../../../generator-web-worker.ts", import.meta.url)
     )
 
+    console.log(workerRef.current)
+
     /** Set new layerData whenever it is sent from Web Worker */
     workerRef.current.onmessage = (evt) => {
       setIsLoading(false)
