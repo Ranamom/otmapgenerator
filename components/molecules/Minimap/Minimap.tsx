@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { Flex, jsx } from "theme-ui"
-import "./generator-web-worker"
 
 import { useRef, useState, useEffect } from "react"
 import dynamic from "next/dynamic"
@@ -27,7 +26,7 @@ function Minimap(props: IMinimapProps) {
   useEffect(() => {
     console.log(import.meta.url)
     workerRef.current = new Worker(
-      new URL("./generator-web-worker.ts", import.meta.url)
+      new URL("../../../generator-web-worker.ts", import.meta.url)
     )
 
     /** Set new layerData whenever it is sent from Web Worker */

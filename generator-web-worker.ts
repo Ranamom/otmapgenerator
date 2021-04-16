@@ -1,6 +1,6 @@
 import { OTMapGenerator } from "otmapgen/OTMapGen"
 
-import { MapGeneratorSettings } from "../SettingsForm"
+import { MapGeneratorSettings } from "./components/molecules/SettingsForm"
 
 console.log("wtf")
 const generator = new OTMapGenerator()
