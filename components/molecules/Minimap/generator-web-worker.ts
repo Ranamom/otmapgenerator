@@ -17,10 +17,11 @@ async function fetchLayerData(settings: MapGeneratorSettings) {
 }
 
 addEventListener("message", async (message) => {
-  if (message.data.settings) {
+  const { data: { settings } = {} } = message
+  if (settings) {
     try {
       const layerData = await fetchLayerData(message.data.settings)
-      postMessage({ layerData }, "*")
+      postMessage({ layerData })
     } catch (error) {
       console.error(error)
     }

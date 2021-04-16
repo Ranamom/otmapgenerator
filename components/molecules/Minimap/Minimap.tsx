@@ -6,6 +6,7 @@ import dynamic from "next/dynamic"
 
 import { MapGeneratorSettings } from "../SettingsForm"
 import { LoadingIcon } from "../../atoms/icons/LoadingIcon"
+import { getIsMobileUserAgent } from "../../../utils/utils"
 
 export interface IMinimapProps {
   settings: MapGeneratorSettings
@@ -52,9 +53,16 @@ function Minimap(props: IMinimapProps) {
 
       const context = canvasRef?.current?.getContext("2d")
 
+      const isMobile = getIsMobileUserAgent()
       // Resize the canvas to fit the map
-      canvasRef.current.width = Math.max(512, layerData.metadata.WIDTH)
-      canvasRef.current.height = Math.max(512, layerData.metadata.HEIGHT)
+      canvasRef.current.width = Math.max(
+        isMobile ? 345 : 512,
+        layerData.metadata.WIDTH
+      )
+      canvasRef.current.height = Math.max(
+        isMobile ? 345 : 512,
+        layerData.metadata.HEIGHT
+      )
 
       // Fill canvas with black background
       context.fillStyle = "black"
@@ -79,12 +87,20 @@ function Minimap(props: IMinimapProps) {
 
       // PNG Watermark
       context.fillStyle = "white"
-      context.font = "bold 14px sans-serif"
-      context.fillText("Minimap Preview Floor: " + activeLayer, 6, 18)
+      context.font = "bold 12px sans-serif"
+      context.fillText(
+        "Map size: " +
+          layerData.metadata.WIDTH +
+          "x" +
+          layerData.metadata.HEIGHT,
+        8,
+        16
+      )
+      context.fillText("Minimap preview floor: " + activeLayer, 8, 32)
       context.fillText(
         "Seed: " + layerData.metadata.SEED.toString(16).toUpperCase(),
-        6,
-        36
+        8,
+        48
       )
     }
   }, [layerData, canvasRef])
