@@ -49,8 +49,10 @@ export function Layout(props: IAppProps) {
             display: "flex",
             marginTop: "3.2rem",
             flexDirection: "column",
+            paddingX: 4,
             "@media (min-width: 45rem)": {
               alignItems: "flex-start",
+              paddingX: 0,
             },
           }}
         >

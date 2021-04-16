@@ -22,6 +22,9 @@ const theme: Theme = {
     body:
       'Rubik, system-ui,  Roboto, "Segoe UI", -apple-system, BlinkMacSystemFont, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", cursive, sans-serif',
   },
+  space: Array.from({ length: 24 })
+    .fill(0)
+    .map((_, index) => index * 4),
   text: {
     heading: {
       color: "secondary.2",

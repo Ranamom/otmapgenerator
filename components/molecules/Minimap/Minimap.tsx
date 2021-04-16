@@ -144,7 +144,11 @@ function Minimap(props: IMinimapProps) {
   return isLoading ? (
     <Flex
       sx={{
-        padding: 4,
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        paddingY: 16,
+        paddingX: 4,
       }}
     >
       <LoadingIcon />

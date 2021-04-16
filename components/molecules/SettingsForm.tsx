@@ -45,78 +45,74 @@ export interface ISettingsFormProps {
   settings: MapGeneratorSettings
 }
 
-function getDeepKeys(obj) {
-  var keys = []
-  for (var key in obj) {
-    keys.push(key)
-    if (typeof obj[key] === "object") {
-      var subkeys = getDeepKeys(obj[key])
-      keys = keys.concat(
-        subkeys.map(function (subkey) {
-          return key + "." + subkey
-        })
-      )
-    }
-  }
-  return keys
-}
-
 export default function SettingsForm(props: ISettingsFormProps) {
   const { settings } = props
   const { register } = useForm<MapGeneratorSettings>()
 
-  const settingsKeys: Array<keyof MapGeneratorSettings> = getDeepKeys(
-    settings
-  ) as any
+  function renderFormFields(key, parentKeys = []) {
+    const isObject =
+      typeof (parentKeys.length
+        ? get(settings, parentKeys.concat(key))
+        : settings[key]) === "object"
 
-  function renderFormFields(keys, parentKeys = []) {
-    const fields = keys.map((key) => {
-      const isObject =
-        typeof (parentKeys.length
+    /** If it's an object, render all subkeys */
+    if (isObject) {
+      const subKeys = Object.keys(
+        parentKeys.length
           ? get(settings, parentKeys.concat(key))
-          : settings[key]) === "object"
+          : settings[key]
+      )
 
-      /** If it's an object, render all subkeys */
-      if (isObject) {
-        const subKeys = getDeepKeys(
-          parentKeys.length ? get(settings, parentKeys) : settings[key]
-        )
-
-        return (
-          <Label
-            key={key}
-            sx={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: 2,
-            }}
-          >
-            {renderFormFields(subKeys, parentKeys.concat(key))}
-          </Label>
-        )
-      }
-
-      const value = get(settings, parentKeys.concat(key))
-      /**
-       * If not an object, it should not render if it's a sub-key
-       * Otherwise, if root key, just render it.
-       */
-      return value ? (
+      return (
         <Label
           key={key}
           sx={{
-            flexDirection: "column",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: 2,
           }}
-          htmlFor={key}
         >
-          {key}
-          <Input {...register(key)} name={key} value={value} />
+          {subKeys.map((subKey) =>
+            renderFormFields(subKey, parentKeys.concat(key))
+          )}
         </Label>
-      ) : null
-    })
+      )
+    }
 
-    return fields
+    /**
+     * Otherwise, if not an object, just render it using the parentKeys to access object name and value
+     */
+
+    let inputName = ""
+    /** Concatenate parent keys to generate input name */
+    parentKeys.map((parentKey) => {
+      inputName += `${parentKey}.`
+    })
+    inputName += key
+
+    const inputValue = get(settings, parentKeys.concat(key))
+
+    return (
+      <Label
+        key={inputName}
+        sx={{
+          flexDirection: "column",
+        }}
+        htmlFor={inputName}
+      >
+        {key}
+        <Input
+          {...register(inputName as any)}
+          name={inputName}
+          value={inputValue}
+        />
+      </Label>
+    )
   }
 
-  return <form>{renderFormFields(settingsKeys)}</form>
+  const fields = Object.keys(settings).map((key) => {
+    return renderFormFields(key)
+  })
+
+  return <form>{fields}</form>
 }

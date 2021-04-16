@@ -79,6 +79,7 @@ export default function Home() {
               alignItems: "flex-start",
               flexDirection: "column",
               alignSelf: "stretch",
+              gap: 2,
 
               "@media (min-width: 45rem)": {
                 flexDirection: "row",
@@ -87,7 +88,7 @@ export default function Home() {
           >
             <Flex
               sx={{
-                flex: "1",
+                flex: "0 35%",
               }}
             >
               <SettingsForm settings={settings} />
@@ -95,7 +96,7 @@ export default function Home() {
 
             <Flex
               sx={{
-                flex: "0 33%",
+                flex: "1",
               }}
             >
               <Minimap settings={settings} />

@@ -25,8 +25,7 @@ export const TextDocument = (props: TextDocumentProps) => {
       sx={{
         flex: "1 auto",
         position: "relative",
-        padding: "8rem 2.4rem",
-        margin: "3.2rem 1.5rem",
+        padding: "8rem 0",
         maxWidth: (type === TextDocumentType.FULL_WIDTH && "none") || "48rem",
         backgroundColor:
           type === TextDocumentType.CARD ? theme.colors.primary[1] : "inherit",
