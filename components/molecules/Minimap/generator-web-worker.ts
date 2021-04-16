@@ -2,6 +2,7 @@ import { OTMapGenerator } from "otmapgen/OTMapGen"
 
 import { MapGeneratorSettings } from "../SettingsForm"
 
+console.log("wtf")
 const generator = new OTMapGenerator()
 
 async function fetchLayerData(settings: MapGeneratorSettings) {
