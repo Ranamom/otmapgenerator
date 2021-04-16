@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { useState } from "react"
-import { jsx, Text, useColorMode } from "theme-ui"
+import { Flex, jsx, Text, useColorMode } from "theme-ui"
 
 import { Layout } from "../components/organisms/Layout/Layout"
 import SettingsForm, {
@@ -56,24 +56,51 @@ export default function Home() {
     <div className="container">
       <main>
         <Layout>
-          <TextDocument type={TextDocumentType.DEFAULT}>
-            <Text as="h1" sx={{ fontSize: 22 }}>
-              Open Tibia Map Generator
-            </Text>
-            <Text>
-              abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcd
-            </Text>
-            <button
-              onClick={(e) => {
-                setColorMode(colorMode === "default" ? "light" : "default")
+          <Flex>
+            <TextDocument type={TextDocumentType.DEFAULT}>
+              <Text as="h1" sx={{ fontSize: 22 }}>
+                Open Tibia Map Generator
+              </Text>
+              <Text>
+                abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcd
+              </Text>
+              <button
+                onClick={(e) => {
+                  setColorMode(colorMode === "default" ? "light" : "default")
+                }}
+              >
+                Toggle {colorMode === "default" ? "light" : "dark"}
+              </button>
+            </TextDocument>
+          </Flex>
+
+          <Flex
+            sx={{
+              alignItems: "flex-start",
+              flexDirection: "column",
+              alignSelf: "stretch",
+
+              "@media (min-width: 45rem)": {
+                flexDirection: "row",
+              },
+            }}
+          >
+            <Flex
+              sx={{
+                flex: "1",
               }}
             >
-              Toggle {colorMode === "default" ? "light" : "dark"}
-            </button>
-          </TextDocument>
+              <SettingsForm settings={settings} />
+            </Flex>
 
-          <SettingsForm settings={settings} />
-          <Minimap settings={settings} />
+            <Flex
+              sx={{
+                flex: "0 33%",
+              }}
+            >
+              <Minimap settings={settings} />
+            </Flex>
+          </Flex>
         </Layout>
       </main>
     </div>

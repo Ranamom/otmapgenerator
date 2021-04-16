@@ -18,6 +18,10 @@ async function fetchLayerData(settings: MapGeneratorSettings) {
   return layerData
 }
 
+/**
+ * This Worker will fetch layer data from OTMapGen based on defined settings
+ * So it prevents the interface to be freezed by the process.
+ */
 ctx.addEventListener?.("message", async (message) => {
   const { data: { settings } = {} } = message
   if (settings) {

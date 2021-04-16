@@ -50,7 +50,6 @@ export function Layout(props: IAppProps) {
             marginTop: "3.2rem",
             flexDirection: "column",
             "@media (min-width: 45rem)": {
-              flexDirection: "row",
               alignItems: "flex-start",
             },
           }}

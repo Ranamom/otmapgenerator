@@ -141,26 +141,21 @@ function Minimap(props: IMinimapProps) {
     // return pixelData
   }
 
-  return (
+  return isLoading ? (
     <Flex
       sx={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        alignSelf: "stretch",
+        padding: 4,
       }}
     >
-      {isLoading ? (
-        <LoadingIcon />
-      ) : (
-        <canvas
-          sx={{
-            width: "100%",
-          }}
-          ref={canvasRef}
-        />
-      )}
+      <LoadingIcon />
     </Flex>
+  ) : (
+    <canvas
+      sx={{
+        width: "100%",
+      }}
+      ref={canvasRef}
+    />
   )
 }
 
