@@ -1,6 +1,8 @@
 import { OTMapGenerator } from "otmapgen/OTMapGen"
 
-import { MapGeneratorSettings } from "./components/molecules/SettingsForm"
+import { MapGeneratorSettings } from "../SettingsForm"
+
+const ctx: Worker = self as any
 
 const generator = new OTMapGenerator()
 
@@ -16,12 +18,12 @@ async function fetchLayerData(settings: MapGeneratorSettings) {
   return layerData
 }
 
-global.addEventListener?.("message", async (message) => {
+ctx.addEventListener?.("message", async (message) => {
   const { data: { settings } = {} } = message
   if (settings) {
     try {
       const layerData = await fetchLayerData(message.data.settings)
-      postMessage({ layerData })
+      ctx.postMessage({ layerData })
     } catch (error) {
       console.error(error)
     }

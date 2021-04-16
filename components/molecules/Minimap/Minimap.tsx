@@ -4,6 +4,7 @@ import { Flex, jsx } from "theme-ui"
 import { useRef, useState, useEffect } from "react"
 import dynamic from "next/dynamic"
 
+import GeneratorWorker from "worker-loader!./generator.worker"
 import { MapGeneratorSettings } from "../SettingsForm"
 import { LoadingIcon } from "../../atoms/icons/LoadingIcon"
 import { getIsMobileUserAgent } from "../../../utils/utils"
@@ -24,9 +25,7 @@ function Minimap(props: IMinimapProps) {
 
   /** Start Web Worker and respond to layerData messages */
   useEffect(() => {
-    workerRef.current = new Worker(
-      new URL("../../../generator-web-worker.ts", import.meta.url)
-    )
+    workerRef.current = new GeneratorWorker()
 
     /** Set new layerData whenever it is sent from Web Worker */
     workerRef.current.onmessage = (evt) => {

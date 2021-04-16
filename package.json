@@ -19,7 +19,11 @@
     "otmapgen": "latest",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "theme-ui": "^0.6.2"
+    "theme-ui": "^0.6.2",
+    "worker-loader": "^3.0.8"
+  },
+  "resolutions": {
+    "webpack": "4.42.0"
   },
   "devDependencies": {
     "@types/node": "^14.0.14",
