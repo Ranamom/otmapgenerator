@@ -46,8 +46,6 @@ const DEFAULT_SETTINGS: MapGeneratorSettings = {
   },
 }
 
-const _transparent = false
-
 export default function Home() {
   const [settings, setSettings] = useState(DEFAULT_SETTINGS)
   const [colorMode, setColorMode] = useColorMode()
@@ -91,7 +89,7 @@ export default function Home() {
                 flex: "0 35%",
               }}
             >
-              <SettingsForm settings={settings} />
+              <SettingsForm settings={settings} setSettings={setSettings} />
             </Flex>
 
             <Flex

@@ -1,6 +1,6 @@
 import * as React from "react"
 import { useForm } from "react-hook-form"
-import { Input, Label } from "theme-ui"
+import { Button, Checkbox, Input, Label } from "theme-ui"
 import { get } from "lodash"
 
 export enum MOUNTAIN_TYPE {
@@ -43,11 +43,14 @@ export type MapGeneratorSettings = {
 
 export interface ISettingsFormProps {
   settings: MapGeneratorSettings
+  setSettings: React.Dispatch<React.SetStateAction<MapGeneratorSettings>>
 }
 
 export default function SettingsForm(props: ISettingsFormProps) {
-  const { settings } = props
-  const { register } = useForm<MapGeneratorSettings>()
+  const { settings, setSettings } = props
+  const { register, handleSubmit } = useForm<MapGeneratorSettings>({
+    defaultValues: settings,
+  })
 
   function renderFormFields(key, parentKeys = []) {
     const isObject =
@@ -91,6 +94,7 @@ export default function SettingsForm(props: ISettingsFormProps) {
     inputName += key
 
     const inputValue = get(settings, parentKeys.concat(key))
+    const isNumberInput = typeof inputValue === "number"
 
     return (
       <Label
@@ -101,11 +105,21 @@ export default function SettingsForm(props: ISettingsFormProps) {
         htmlFor={inputName}
       >
         {key}
-        <Input
-          {...register(inputName as any)}
-          name={inputName}
-          value={inputValue}
-        />
+        {typeof inputValue === "boolean" ? (
+          <Checkbox
+            {...register(inputName as any)}
+            name={inputName}
+            type="checkbox"
+            checked={inputValue}
+          />
+        ) : (
+          <Input
+            {...register(inputName as any)}
+            name={inputName}
+            type={isNumberInput ? "number" : "text"}
+            defaultValue={isNumberInput ? Number(inputValue) : inputValue}
+          />
+        )}
       </Label>
     )
   }
@@ -114,5 +128,17 @@ export default function SettingsForm(props: ISettingsFormProps) {
     return renderFormFields(key)
   })
 
-  return <form>{fields}</form>
+  function handleFormSubmit(data) {
+    setSettings(data)
+  }
+
+  return (
+    <form onSubmit={handleSubmit(handleFormSubmit)}>
+      {fields}
+
+      <Button mt={2} type="submit">
+        Generate minimap
+      </Button>
+    </form>
+  )
 }
