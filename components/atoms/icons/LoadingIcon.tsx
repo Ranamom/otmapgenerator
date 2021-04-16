@@ -11,9 +11,9 @@ const rotate = keyframes`
   }
 `
 
-export const LoadingIcon = ({ size = "30px", centered = false }) => (
+export const LoadingIcon = ({ className = "", size = "30px" }) => (
   <svg
-    className={`loading-icon ${centered ? "centered" : ""}`}
+    className={`loading-icon ${className}`}
     width={size}
     height={size}
     sx={{ stroke: "secondary.0" }}

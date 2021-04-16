@@ -8,6 +8,10 @@ import SettingsForm, {
   MOUNTAIN_TYPE,
 } from "../components/molecules/SettingsForm"
 import Minimap from "../components/molecules/Minimap/Minimap"
+import {
+  TextDocument,
+  TextDocumentType,
+} from "../components/organisms/Layout/TextDocument"
 
 const DEFAULT_SETTINGS: MapGeneratorSettings = {
   SEED: "",
@@ -52,21 +56,25 @@ export default function Home() {
     <div className="container">
       <main>
         <Layout>
-          <Text as="h1" sx={{ fontSize: 22 }}>
-            Open Tibia Map Generator
-          </Text>
-          <Text>abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcd</Text>
-          <button
-            onClick={(e) => {
-              setColorMode(colorMode === "default" ? "light" : "default")
-            }}
-          >
-            Toggle {colorMode === "default" ? "light" : "dark"}
-          </button>
+          <TextDocument type={TextDocumentType.DEFAULT}>
+            <Text as="h1" sx={{ fontSize: 22 }}>
+              Open Tibia Map Generator
+            </Text>
+            <Text>
+              abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcd
+            </Text>
+            <button
+              onClick={(e) => {
+                setColorMode(colorMode === "default" ? "light" : "default")
+              }}
+            >
+              Toggle {colorMode === "default" ? "light" : "dark"}
+            </button>
+          </TextDocument>
 
           <SettingsForm settings={settings} />
+          <Minimap settings={settings} />
         </Layout>
-        <Minimap settings={settings} />
       </main>
     </div>
   )

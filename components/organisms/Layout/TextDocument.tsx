@@ -1,9 +1,10 @@
 /** @jsx jsx */
 import { jsx, useThemeUI } from "theme-ui"
 
-enum TextDocumentType {
+export enum TextDocumentType {
   DEFAULT,
   FULL_WIDTH,
+  CARD,
 }
 
 interface TextDocumentProps {
@@ -27,12 +28,16 @@ export const TextDocument = (props: TextDocumentProps) => {
         padding: "8rem 2.4rem",
         margin: "3.2rem 1.5rem",
         maxWidth: (type === TextDocumentType.FULL_WIDTH && "none") || "48rem",
-        backgroundColor: theme.colors.primary[1],
-        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+        backgroundColor:
+          type === TextDocumentType.CARD ? theme.colors.primary[1] : "inherit",
+        boxShadow:
+          type === TextDocumentType.CARD
+            ? "0px 4px 4px rgba(0, 0, 0, 0.25)"
+            : "none",
         overflow: "hidden",
 
         "&::after, &::before": {
-          content: "''",
+          ...(type === TextDocumentType.CARD ? { content: "''" } : {}),
           position: "absolute",
 
           margin: "-16px",

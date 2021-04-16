@@ -5,7 +5,6 @@ import * as React from "react"
 import { Container } from "theme-ui"
 import NProgress from "nprogress"
 import Router from "next/router"
-import { TextDocument } from "./TextDocument"
 
 export interface IAppProps {
   children: React.ReactNode
@@ -56,7 +55,7 @@ export function Layout(props: IAppProps) {
             },
           }}
         >
-          <TextDocument type={type}>{children}</TextDocument>
+          {children}
         </div>
       </div>
     </Container>

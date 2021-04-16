@@ -1,7 +1,11 @@
-import { useRef, useState, useEffect, useCallback, Fragment } from "react"
+/** @jsx jsx */
+import { Flex, jsx } from "theme-ui"
+
+import { useRef, useState, useEffect } from "react"
 import dynamic from "next/dynamic"
 
 import { MapGeneratorSettings } from "../SettingsForm"
+import { LoadingIcon } from "../../atoms/icons/LoadingIcon"
 
 export interface IMinimapProps {
   settings: MapGeneratorSettings
@@ -38,10 +42,6 @@ function Minimap(props: IMinimapProps) {
   useEffect(() => {
     workerRef.current.postMessage({ settings })
   }, [settings])
-
-  const handleWork = useCallback(async () => {}, [])
-
-  useEffect(() => {}, [settings])
 
   /*
    * Writes the currently active layer to the canvas
@@ -124,10 +124,25 @@ function Minimap(props: IMinimapProps) {
   }
 
   return (
-    <Fragment>
-      <canvas ref={canvasRef} />
-      <button onClick={handleWork}>Calculate PI</button>
-    </Fragment>
+    <Flex
+      sx={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        alignSelf: "stretch",
+      }}
+    >
+      {!layerData ? (
+        <LoadingIcon />
+      ) : (
+        <canvas
+          sx={{
+            width: "100%",
+          }}
+          ref={canvasRef}
+        />
+      )}
+    </Flex>
   )
 }
 
