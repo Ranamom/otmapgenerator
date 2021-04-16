@@ -2,7 +2,6 @@ import { OTMapGenerator } from "otmapgen/OTMapGen"
 
 import { MapGeneratorSettings } from "./components/molecules/SettingsForm"
 
-console.log("wtf")
 const generator = new OTMapGenerator()
 
 async function fetchLayerData(settings: MapGeneratorSettings) {
@@ -17,9 +16,7 @@ async function fetchLayerData(settings: MapGeneratorSettings) {
   return layerData
 }
 
-console.log(global.addEventListener)
 global.addEventListener?.("message", async (message) => {
-  console.log("Message")
   const { data: { settings } = {} } = message
   if (settings) {
     try {
