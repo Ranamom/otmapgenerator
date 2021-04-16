@@ -23,32 +23,32 @@ function Minimap(props: IMinimapProps) {
   const workerRef = useRef<Worker>()
 
   /** Start Web Worker and respond to layerData messages */
-  useEffect(() => {
-    workerRef.current = new Worker(
-      new URL("../../../generator-web-worker.ts", import.meta.url)
-    )
+  // useEffect(() => {
+  //   workerRef.current = new Worker(
+  //     new URL("../../../generator-web-worker.ts", import.meta.url)
+  //   )
 
-    console.log("started worker")
-    console.log(workerRef.current)
-    /** Set new layerData whenever it is sent from Web Worker */
-    workerRef.current.onmessage = (evt) => {
-      setIsLoading(false)
-      if (evt.data.layerData) {
-        setLayerData(evt.data.layerData)
-      }
-    }
+  //   /** Set new layerData whenever it is sent from Web Worker */
+  //   workerRef.current.onmessage = (evt) => {
+  //     setIsLoading(false)
+  //     if (evt.data.layerData) {
+  //       console.log("setting new layerData....")
+  //       setLayerData(evt.data.layerData)
+  //     }
+  //   }
 
-    return () => {
-      workerRef.current.terminate()
-    }
-  }, [setLayerData])
+  //   return () => {
+  //     workerRef.current.terminate()
+  //   }
+  // }, [setLayerData])
 
-  /** Post new seetings to Web Worker whenever the state changes */
-  useEffect(() => {
-    console.log("posting message to: ")
-    console.log(workerRef.current)
-    setIsLoading(true)
-  }, [settings])
+  // /** Post new seetings to Web Worker whenever the state changes */
+  // useEffect(() => {
+  //   console.log("posting message to: ")
+  //   console.log(workerRef.current)
+  //   setIsLoading(true)
+  //   workerRef.current.postMessage({ settings })
+  // }, [settings])
 
   /*
    * Writes the currently active layer to the canvas
