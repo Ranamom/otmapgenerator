@@ -15,8 +15,8 @@ import {
 
 const DEFAULT_SETTINGS: MapGeneratorSettings = {
   SEED: "",
-  WIDTH: 512,
-  HEIGHT: 512,
+  WIDTH: 256,
+  HEIGHT: 256,
   VERSION: "10.98",
   TERRAIN_ONLY: false,
   GENERATION: {

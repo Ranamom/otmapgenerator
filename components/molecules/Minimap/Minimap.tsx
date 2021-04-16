@@ -17,18 +17,21 @@ function Minimap(props: IMinimapProps) {
 
   const [layerData, setLayerData] = useState(null)
   const [activeLayer, setActiveLayer] = useState(0)
+  const [isLoading, setIsLoading] = useState(false)
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const workerRef = useRef<Worker>()
 
   /** Start Web Worker and respond to layerData messages */
   useEffect(() => {
+    console.log(new URL("./generator-web-worker", import.meta.url))
     workerRef.current = new Worker(
       new URL("./generator-web-worker", import.meta.url)
     )
 
     /** Set new layerData whenever it is sent from Web Worker */
     workerRef.current.onmessage = (evt) => {
+      setIsLoading(false)
       if (evt.data.layerData) {
         setLayerData(evt.data.layerData)
       }
@@ -42,6 +45,7 @@ function Minimap(props: IMinimapProps) {
   /** Post new seetings to Web Worker whenever the state changes */
   useEffect(() => {
     workerRef.current.postMessage({ settings })
+    setIsLoading(true)
   }, [settings])
 
   /*
@@ -148,7 +152,7 @@ function Minimap(props: IMinimapProps) {
         alignSelf: "stretch",
       }}
     >
-      {!layerData ? (
+      {isLoading ? (
         <LoadingIcon />
       ) : (
         <canvas
