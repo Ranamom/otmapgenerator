@@ -5,7 +5,7 @@ export enum MOUNTAIN_TYPE {
   DEFAULT = "MOUNTAIN",
 }
 
-export type SettingsType = {
+export type MapGeneratorSettings = {
   SEED: string
   WIDTH: number
   HEIGHT: number
@@ -39,7 +39,7 @@ export type SettingsType = {
 }
 
 export interface ISettingsFormProps {
-  settings: SettingsType
+  settings: MapGeneratorSettings
 }
 
 export default function SettingsForm(props: ISettingsFormProps) {

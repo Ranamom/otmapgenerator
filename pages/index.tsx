@@ -4,12 +4,12 @@ import { jsx, Text, useColorMode } from "theme-ui"
 
 import { Layout } from "../components/organisms/Layout/Layout"
 import SettingsForm, {
-  SettingsType,
+  MapGeneratorSettings,
   MOUNTAIN_TYPE,
 } from "../components/molecules/SettingsForm"
-import Minimap from "../components/molecules/Minimap"
+import Minimap from "../components/molecules/Minimap/Minimap"
 
-const DEFAULT_SETTINGS: SettingsType = {
+const DEFAULT_SETTINGS: MapGeneratorSettings = {
   SEED: "",
   WIDTH: 256,
   HEIGHT: 256,

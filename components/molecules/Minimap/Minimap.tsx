@@ -1,33 +1,51 @@
-import { useRef, useState, useEffect } from "react"
-import { OTMapGenerator } from "otmapgen/OTMapGen"
+import { useRef, useState, useEffect, useCallback, Fragment } from "react"
 import dynamic from "next/dynamic"
 
-import { SettingsType } from "./SettingsForm"
+import { MapGeneratorSettings } from "../SettingsForm"
 
 export interface IMinimapProps {
-  settings: SettingsType
+  settings: MapGeneratorSettings
 }
-
-const generator = new OTMapGenerator()
 
 function Minimap(props: IMinimapProps) {
   const { settings } = props
 
   const [layerData, setLayerData] = useState(null)
   const [activeLayer, setActiveLayer] = useState(0)
-  const canvasRef = useRef<HTMLCanvasElement>(null)
 
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const workerRef = useRef<Worker>()
+
+  /** Start Web Worker and respond to layerData messages */
   useEffect(() => {
-    setTimeout(() => {
-      const layerData = generator.generateMinimap(settings)
-      setLayerData(layerData)
-    }, 10)
+    workerRef.current = new Worker(
+      new URL("./generator-web-worker", import.meta.url)
+    )
+
+    /** Set new layerData whenever it is sent from Web Worker */
+    workerRef.current.onmessage = (evt) => {
+      if (evt.data.layerData) {
+        setLayerData(evt.data.layerData)
+      }
+    }
+
+    return () => {
+      workerRef.current.terminate()
+    }
+  }, [setLayerData])
+
+  /** Post new seetings to Web Worker whenever the state changes */
+  useEffect(() => {
+    workerRef.current.postMessage({ settings })
   }, [settings])
+
+  const handleWork = useCallback(async () => {}, [])
+
+  useEffect(() => {}, [settings])
 
   /*
    * Writes the currently active layer to the canvas
    */
-
   useEffect(() => {
     if (canvasRef.current && layerData) {
       setActiveLayer((previous) => Math.min(Math.max(previous, 0), 7))
@@ -105,7 +123,12 @@ function Minimap(props: IMinimapProps) {
     // return pixelData
   }
 
-  return <canvas ref={canvasRef} />
+  return (
+    <Fragment>
+      <canvas ref={canvasRef} />
+      <button onClick={handleWork}>Calculate PI</button>
+    </Fragment>
+  )
 }
 
 export default dynamic(() => Promise.resolve(Minimap), {

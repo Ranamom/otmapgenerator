@@ -1,11 +1,21 @@
 /** @jsx jsx */
 import { jsx, useThemeUI } from "theme-ui"
 
+enum TextDocumentType {
+  DEFAULT,
+  FULL_WIDTH,
+}
+
+interface TextDocumentProps {
+  type: TextDocumentType
+  children: React.ReactNode
+}
+
 /**
  * Component responsible for managing the max width
  * for a text to be properly read on the screen
  */
-export const TextDocument = (props) => {
+export const TextDocument = (props: TextDocumentProps) => {
   const { children, type } = props
   const { theme } = useThemeUI()
 
@@ -16,7 +26,7 @@ export const TextDocument = (props) => {
         position: "relative",
         padding: "8rem 2.4rem",
         margin: "3.2rem 1.5rem",
-        maxWidth: (type && "none") || "48rem",
+        maxWidth: (type === TextDocumentType.FULL_WIDTH && "none") || "48rem",
         backgroundColor: theme.colors.primary[1],
         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
         overflow: "hidden",
