@@ -2810,7 +2810,7 @@ otbm2json@^0.2.0:
   resolved "https://registry.yarnpkg.com/otbm2json/-/otbm2json-0.2.0.tgz#00c66106ad2e9bc0d6bc6d05ac2536c22a273b0c"
   integrity sha512-jbD7gZmASqvZzUjoyv6RdtCALpKcaqi3w+ozZEDXZCJPVPpBN6TVYfuJIgCoQauGsx/AAReLyd1O9C/DPmuG0Q==
 
-otmapgen@^1.5.4:
+otmapgen@latest:
   version "1.5.4"
   resolved "https://registry.yarnpkg.com/otmapgen/-/otmapgen-1.5.4.tgz#59085b053752531212dba0901ac8e30db13785ca"
   integrity sha512-TidRI81CX0gUnbeDAiTF5bxYSY3e36AHQ6+q6n6y5yj5W9VRMv/ex+yw2hHfaQksWbVM2tovTQ4oCJaf8B4HrA==
@@ -3802,10 +3802,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@^3.9.5:
-  version "3.9.9"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.9.tgz#e69905c54bc0681d0518bd4d587cc6f2d0b1a674"
-  integrity sha512-kdMjTiekY+z/ubJCATUPlRDl39vXYiMV9iyeMuEuXZh2we6zz80uovNN2WlAxmmdE/Z/YQe+EbOEXB5RHEED3w==
+typescript@^4.2.4:
+  version "4.2.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.2.4.tgz#8610b59747de028fda898a8aef0e103f156d0961"
+  integrity sha512-V+evlYHZnQkaz8TRBuxTA92yZBPotr5H+WhQ7bD3hZUndx5tGOa1fuCgeSjxAzM1RiN5IzvadIXTVefuuwZCRg==
 
 unbox-primitive@^1.0.0:
   version "1.0.1"
