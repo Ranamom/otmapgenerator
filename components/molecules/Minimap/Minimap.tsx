@@ -24,13 +24,12 @@ function Minimap(props: IMinimapProps) {
 
   /** Start Web Worker and respond to layerData messages */
   useEffect(() => {
-    console.log(import.meta.url)
     workerRef.current = new Worker(
       new URL("../../../generator-web-worker.ts", import.meta.url)
     )
 
+    console.log("started worker")
     console.log(workerRef.current)
-
     /** Set new layerData whenever it is sent from Web Worker */
     workerRef.current.onmessage = (evt) => {
       setIsLoading(false)
@@ -46,7 +45,8 @@ function Minimap(props: IMinimapProps) {
 
   /** Post new seetings to Web Worker whenever the state changes */
   useEffect(() => {
-    workerRef.current.postMessage({ settings })
+    console.log("posting message to: ")
+    console.log(workerRef.current)
     setIsLoading(true)
   }, [settings])
 
