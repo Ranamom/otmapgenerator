@@ -59,16 +59,14 @@ export default function Home() {
               <Text as="h1" sx={{ fontSize: 22 }}>
                 Open Tibia Map Generator
               </Text>
-              <Text>
-                abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcd
-              </Text>
-              <button
+              <Text></Text>
+              {/* <button
                 onClick={(e) => {
                   setColorMode(colorMode === "default" ? "light" : "default")
                 }}
               >
                 Toggle {colorMode === "default" ? "light" : "dark"}
-              </button>
+              </button> */}
             </TextDocument>
           </Flex>
 
