@@ -69,6 +69,10 @@ const theme: Theme = {
         color: (theme) => `${theme.colors.secondary[3]} !important`,
       },
     },
+    checkbox: {
+      backgroundColor: "primary.1",
+      fill: "secondary.3",
+    },
   },
   styles: {
     root: {

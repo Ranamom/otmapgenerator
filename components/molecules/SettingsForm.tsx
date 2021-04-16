@@ -102,15 +102,13 @@ export default function SettingsForm(props: ISettingsFormProps) {
         sx={{
           flexDirection: "column",
         }}
-        htmlFor={inputName}
       >
         {key}
         {typeof inputValue === "boolean" ? (
           <Checkbox
             {...register(inputName as any)}
             name={inputName}
-            type="checkbox"
-            checked={inputValue}
+            defaultChecked={inputValue}
           />
         ) : (
           <Input
