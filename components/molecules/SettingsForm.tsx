@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Flex, jsx } from "theme-ui"
+import { Flex, jsx, Select } from "theme-ui"
 import { useForm } from "react-hook-form"
 import { Button, Checkbox, Input, Label } from "theme-ui"
 import { get } from "lodash"
@@ -8,6 +8,7 @@ import { Fragment } from "react"
 export enum MOUNTAIN_TYPE {
   ICY = "ICY_MOUNTAIN",
   DEFAULT = "MOUNTAIN",
+  EARTH = "EARTH_MOUNTAIN",
 }
 
 export type MapGeneratorSettings = {
@@ -121,6 +122,18 @@ export default function SettingsForm(props: ISettingsFormProps) {
             name={inputName}
             defaultChecked={inputValue}
           />
+        ) : key === "MOUNTAIN_TYPE" ? (
+          <Select
+            {...register(inputName as any)}
+            name={inputName}
+            defaultValue={isNumberInput ? Number(inputValue) : inputValue}
+          >
+            {Object.keys(MOUNTAIN_TYPE).map((key) => (
+              <option key={key} value={MOUNTAIN_TYPE[key]}>
+                {key}
+              </option>
+            ))}
+          </Select>
         ) : (
           <Input
             {...register(inputName as any)}

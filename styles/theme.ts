@@ -58,6 +58,9 @@ const theme: Theme = {
     },
   },
   forms: {
+    select: {
+      backgroundColor: "primary.1",
+    },
     input: {
       backgroundColor: "primary.1",
 
