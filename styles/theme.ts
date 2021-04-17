@@ -43,10 +43,12 @@ const theme: Theme = {
   },
   buttons: {
     primary: {
-      color: "primary.1",
-      bg: "secondary.3",
+      display: "flex",
+      alignItems: "center",
+      color: "primary.0",
+      bg: "secondary.2",
       "&:hover": {
-        bg: "secondary.2",
+        bg: "secondary.1",
       },
       cursor: "pointer",
     },

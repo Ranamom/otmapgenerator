@@ -4,7 +4,7 @@ import { Flex, jsx, Text } from "theme-ui"
 import { useRef, useState, useEffect } from "react"
 import dynamic from "next/dynamic"
 
-import GeneratorWorker from "worker-loader!./generator.worker"
+import GeneratorWorker from "worker-loader!./minimap.worker"
 import { MapGeneratorSettings } from "../SettingsForm"
 import { LoadingIcon } from "../../atoms/icons/LoadingIcon"
 import { getIsMobileUserAgent } from "../../../utils/utils"
@@ -43,7 +43,9 @@ function Minimap(props: IMinimapProps) {
   /** Post new seetings to Web Worker whenever the state changes */
   useEffect(() => {
     setIsLoading(true)
-    workerRef.current.postMessage({ settings })
+    workerRef.current.postMessage({
+      settings,
+    })
   }, [settings])
 
   /*

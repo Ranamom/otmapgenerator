@@ -1,7 +1,8 @@
 /** @jsx jsx */
-import { useState } from "react"
-import { Flex, jsx, Text, useColorMode } from "theme-ui"
+import { useEffect, useRef, useState } from "react"
+import { Button, Flex, jsx, Text } from "theme-ui"
 
+import GeneratorWorker from "worker-loader!../utils/generator.worker"
 import { Layout } from "../components/organisms/Layout/Layout"
 import SettingsForm, {
   MapGeneratorSettings,
@@ -12,6 +13,7 @@ import {
   TextDocument,
   TextDocumentType,
 } from "../components/organisms/Layout/TextDocument"
+import { LoadingIcon } from "../components/atoms/icons/LoadingIcon"
 
 const DEFAULT_SETTINGS: MapGeneratorSettings = {
   SEED: "",
@@ -48,7 +50,51 @@ const DEFAULT_SETTINGS: MapGeneratorSettings = {
 
 export default function Home() {
   const [settings, setSettings] = useState(DEFAULT_SETTINGS)
-  const [colorMode, setColorMode] = useColorMode()
+  // const [colorMode, setColorMode] = useColorMode()
+  const [isLoading, setIsLoading] = useState(false)
+  const [generatedBlob, setGeneratedBlob] = useState<Blob>()
+  const workerRef = useRef<Worker>()
+
+  /** Start Web Worker and respond to generatedBlob messages */
+  useEffect(() => {
+    workerRef.current = new GeneratorWorker()
+
+    /** Set new generatedBlob whenever it is sent from Web Worker */
+    workerRef.current.onmessage = (evt) => {
+      setIsLoading(false)
+      if (evt.data.generatedBlob) {
+        setGeneratedBlob(evt.data.generatedBlob)
+      }
+    }
+
+    return () => {
+      workerRef.current.terminate()
+    }
+  }, [setGeneratedBlob])
+
+  /** If there is generatedBlob, just create an element to download it */
+  useEffect(() => {
+    if (generatedBlob) {
+      const CONTENT_TYPE = "application/octet-stream"
+      const FILENAME = "map-" + settings.VERSION + ".otbm"
+
+      var aElement = document.createElement("a")
+
+      // Firefox fix
+      document.body.appendChild(aElement)
+      aElement.target = "_self"
+
+      // Write encoded component and click download link
+      aElement.href = window.URL.createObjectURL(
+        new Blob([generatedBlob], { type: CONTENT_TYPE })
+      )
+      aElement.download = FILENAME
+      aElement.click()
+
+      // Clean up
+      aElement.remove()
+    }
+  }, [generatedBlob])
 
   return (
     <div className="container">
@@ -93,9 +139,42 @@ export default function Home() {
             <Flex
               sx={{
                 flex: "1 auto",
+                flexDirection: "column",
               }}
             >
               <Minimap settings={settings} />
+              <Flex
+                mt={2}
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  alignSelf: "flex-start",
+                }}
+              >
+                Generate OTBM file from settings:
+                <Button
+                  onClick={() => {
+                    setIsLoading(true)
+                    workerRef.current.postMessage({
+                      settings,
+                    })
+                  }}
+                  mt={1}
+                >
+                  {isLoading ? (
+                    <LoadingIcon
+                      sx={{
+                        stroke: "primary.0",
+                        marginX: 8,
+                      }}
+                      size={"16"}
+                    />
+                  ) : (
+                    "Generate OTBM"
+                  )}
+                </Button>
+              </Flex>
             </Flex>
           </Flex>
         </Layout>
