@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Flex, jsx } from "theme-ui"
+import { Flex, jsx, Text } from "theme-ui"
 
 import { useRef, useState, useEffect } from "react"
 import dynamic from "next/dynamic"
@@ -141,25 +141,40 @@ function Minimap(props: IMinimapProps) {
     // return pixelData
   }
 
-  return isLoading ? (
+  return (
     <Flex
       sx={{
         flex: 1,
+        flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        paddingY: 16,
-        paddingX: 4,
+        alignSelf: "stretch",
       }}
     >
-      <LoadingIcon />
+      <Text>Minimap:</Text>
+
+      {isLoading ? (
+        <Flex
+          sx={{
+            paddingY: 16,
+            paddingX: 4,
+          }}
+        >
+          <LoadingIcon />
+        </Flex>
+      ) : (
+        <canvas
+          sx={{
+            width: "100%",
+            border: "1px solid",
+            borderColor: "secondary.3",
+            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+            borderRadius: 1,
+          }}
+          ref={canvasRef}
+        />
+      )}
     </Flex>
-  ) : (
-    <canvas
-      sx={{
-        width: "100%",
-      }}
-      ref={canvasRef}
-    />
   )
 }
 

@@ -114,7 +114,7 @@ export default function SettingsForm(props: ISettingsFormProps) {
           flexDirection: "column",
         }}
       >
-        {key}
+        {key}:
         {typeof inputValue === "boolean" ? (
           <Checkbox
             {...register(inputName as any)}
