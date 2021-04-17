@@ -1,7 +1,9 @@
-import * as React from "react"
+/** @jsx jsx */
+import { Flex, jsx } from "theme-ui"
 import { useForm } from "react-hook-form"
 import { Button, Checkbox, Input, Label } from "theme-ui"
 import { get } from "lodash"
+import { Fragment } from "react"
 
 export enum MOUNTAIN_TYPE {
   ICY = "ICY_MOUNTAIN",
@@ -67,18 +69,27 @@ export default function SettingsForm(props: ISettingsFormProps) {
       )
 
       return (
-        <Label
-          key={key}
-          sx={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: 2,
-          }}
-        >
-          {subKeys.map((subKey) =>
-            renderFormFields(subKey, parentKeys.concat(key))
+        <Fragment key={key}>
+          {key.length > 3 && (
+            <Flex sx={{ gridColumn: "1/2" }}>
+              <h3>{key} params:</h3>
+            </Flex>
           )}
-        </Label>
+
+          <div
+            key={key}
+            sx={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: 2,
+              gridColumn: "1/3",
+            }}
+          >
+            {subKeys.map((subKey) =>
+              renderFormFields(subKey, parentKeys.concat(key))
+            )}
+          </div>
+        </Fragment>
       )
     }
 
@@ -131,7 +142,14 @@ export default function SettingsForm(props: ISettingsFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)}>
+    <form
+      sx={{
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gap: 2,
+      }}
+      onSubmit={handleSubmit(handleFormSubmit)}
+    >
       {fields}
 
       <Button mt={2} type="submit">

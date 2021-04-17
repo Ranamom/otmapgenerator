@@ -58,9 +58,6 @@ const theme: Theme = {
   forms: {
     input: {
       backgroundColor: "primary.1",
-      "&:focus": {
-        outline: "none",
-      },
 
       /** override browser agent input autofill */
       "&:-webkit-autofill": {

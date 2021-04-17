@@ -15,9 +15,9 @@ import {
 
 const DEFAULT_SETTINGS: MapGeneratorSettings = {
   SEED: "",
+  VERSION: "10.98",
   WIDTH: 256,
   HEIGHT: 256,
-  VERSION: "10.98",
   TERRAIN_ONLY: false,
   GENERATION: {
     A: 1,
@@ -84,7 +84,7 @@ export default function Home() {
           >
             <Flex
               sx={{
-                flex: "0 35%",
+                flex: "0 auto",
               }}
             >
               <SettingsForm settings={settings} setSettings={setSettings} />
@@ -92,7 +92,7 @@ export default function Home() {
 
             <Flex
               sx={{
-                flex: "1",
+                flex: "1 auto",
               }}
             >
               <Minimap settings={settings} />

@@ -39,25 +39,18 @@ export function Layout(props: IAppProps) {
     <Container>
       <div
         sx={{
-          "@media(min-width: 45rem)": {
-            padding: "8rem 0",
+          display: "flex",
+          marginTop: "3.2rem",
+          flexDirection: "column",
+          paddingX: 4,
+          paddingBottom: 16,
+          "@media (min-width: 45rem)": {
+            alignItems: "flex-start",
+            paddingX: 0,
           },
         }}
       >
-        <div
-          sx={{
-            display: "flex",
-            marginTop: "3.2rem",
-            flexDirection: "column",
-            paddingX: 4,
-            "@media (min-width: 45rem)": {
-              alignItems: "flex-start",
-              paddingX: 0,
-            },
-          }}
-        >
-          {children}
-        </div>
+        {children}
       </div>
     </Container>
   )
