@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Flex, jsx, Select } from "theme-ui"
+import { Flex, jsx, Select, Text } from "theme-ui"
 import { useForm } from "react-hook-form"
 import { Button, Checkbox, Input, Label } from "theme-ui"
 import { get } from "lodash"
@@ -73,7 +73,7 @@ export default function SettingsForm(props: ISettingsFormProps) {
         <Fragment key={key}>
           {key.length > 3 && (
             <Flex sx={{ gridColumn: "1/2" }}>
-              <h3>{key} params:</h3>
+              <Text as="h3">{key} parameters:</Text>
             </Flex>
           )}
 
@@ -138,7 +138,6 @@ export default function SettingsForm(props: ISettingsFormProps) {
           <Input
             {...register(inputName as any)}
             name={inputName}
-            type={isNumberInput ? "number" : "text"}
             defaultValue={isNumberInput ? Number(inputValue) : inputValue}
           />
         )}
@@ -155,19 +154,26 @@ export default function SettingsForm(props: ISettingsFormProps) {
   }
 
   return (
-    <form
+    <Flex
       sx={{
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap: 2,
+        flexDirection: "column",
       }}
-      onSubmit={handleSubmit(handleFormSubmit)}
     >
-      {fields}
+      <Text as="h2">Generative settings:</Text>
+      <form
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: 2,
+        }}
+        onSubmit={handleSubmit(handleFormSubmit)}
+      >
+        {fields}
 
-      <Button mt={2} type="submit">
-        Generate minimap
-      </Button>
-    </form>
+        <Button mt={2} type="submit">
+          Generate minimap
+        </Button>
+      </form>
+    </Flex>
   )
 }

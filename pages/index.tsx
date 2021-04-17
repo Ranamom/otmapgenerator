@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { useEffect, useRef, useState } from "react"
-import { Button, Flex, jsx, Text } from "theme-ui"
+import { Button, Flex, jsx, Link, Text } from "theme-ui"
 
 import GeneratorWorker from "worker-loader!../utils/generator.worker"
 import { Layout } from "../components/organisms/Layout/Layout"
@@ -105,7 +105,17 @@ export default function Home() {
               <Text as="h1" sx={{ fontSize: 22 }}>
                 Open Tibia Map Generator
               </Text>
-              <Text></Text>
+              <Text>
+                Uses{" "}
+                <Link
+                  href="https://www.npmjs.com/package/otmapgen"
+                  target="_blank"
+                >
+                  OTMapGen
+                </Link>{" "}
+                (2D simplex noise to create releastic terrain) to preview
+                minimap and generate OTBM files from settings
+              </Text>
               {/* <button
                 onClick={(e) => {
                   setColorMode(colorMode === "default" ? "light" : "default")
