@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# otmapgenerator
+
+Frontend application to use [OTMapGen](https://www.npmjs.com/package/otmapgen) in the browser.
 
 ## Getting Started
 
