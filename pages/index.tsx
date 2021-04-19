@@ -14,39 +14,9 @@ import {
   TextDocumentType,
 } from "../components/organisms/Layout/TextDocument"
 import { LoadingIcon } from "../components/atoms/icons/LoadingIcon"
+import { DEFAULT_CONFIG } from "otmapgen/OTMapGen"
 
-const DEFAULT_SETTINGS: MapGeneratorSettings = {
-  SEED: "",
-  VERSION: "10.98",
-  WIDTH: 256,
-  HEIGHT: 256,
-  TERRAIN_ONLY: false,
-  GENERATION: {
-    A: 1,
-    B: 0.92,
-    C: 0.25,
-    CAVE_DEPTH: 20,
-    CAVE_ROUGHNESS: 0.45,
-    CAVE_CHANCE: 0.009,
-    SAND_BIOME: true,
-    EUCLIDEAN: false,
-    SMOOTH_COASTLINE: true,
-    ADD_CAVES: true,
-    WATER_LEVEL: 2,
-    EXPONENT: 1.4,
-    LINEAR: 6,
-    MOUNTAIN_TYPE: MOUNTAIN_TYPE.ICY,
-    FREQUENCIES: [
-      { f: 1, weight: 0.3 },
-      { f: 2, weight: 0.2 },
-      { f: 4, weight: 0.2 },
-      { f: 8, weight: 0.125 },
-      { f: 16, weight: 0.1 },
-      { f: 32, weight: 0.05 },
-      { f: 64, weight: 0.0025 },
-    ],
-  },
-}
+const DEFAULT_SETTINGS: MapGeneratorSettings = DEFAULT_CONFIG
 
 export default function Home() {
   const [settings, setSettings] = useState(DEFAULT_SETTINGS)
